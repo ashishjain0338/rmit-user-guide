@@ -57,3 +57,9 @@ cd /home/ubuntu/ashish_work_dir/scripts/traffic-generation/multi_ue_generation_s
 ```
 Note: The logs will be stored under the folder `traffic-logs`
 
+8. Retrieve Data from Kafka Topic
+```bash
+/usr/local/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic testTopic --from-beginning
+```
+Note: The kafka message will contains 5 comma separated-values as per the schema: `PCI_ID, dlprb_usage, ulprb_usage, dl_brate, ul_brate, sinr`
+

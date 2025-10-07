@@ -63,3 +63,25 @@ Note: The logs will be stored under the folder `traffic-logs`
 ```
 Note: The kafka message will contains 5 comma separated-values as per the schema: `PCI_ID, dlprb_usage, ulprb_usage, dl_brate, ul_brate, sinr`
 
+9. Send data to NonRtRic  
+  ```bash
+  # Get NonRtric influx-db token: To be run where NonRtRic is installed
+  git clone "https://gerrit.o-ran-sc.org/r/aiml-fw/aimlfw-dep"
+  cd aimlfw-dep/demos/hrelease/scripts
+  # The following script will give the inflxu-Token for RANPM
+  ./get_access_tokens.sh
+  ```
+  Note: If the token is empty, then reinstall the Nonrtric via `Ready_the_system.sh`.
+
+  ```bash
+#port-forward (from NonRtRic-VM)
+kubectl port-forward svc/influxdb2 -n nonrtric --address 0.0.0.0 31812:8086
+```
+
+```bash
+# Start sending data from gnb (from gnb VM)
+cd /home/ubuntu/ashish_work_dir/scripts/traffic-generation/multi_ue_generation_script/kpi-logger
+./load_venv.sh
+source ~/venvs/kafka-env/bin/activate
+python3 kpi_logger_to_nonrtric.py
+```

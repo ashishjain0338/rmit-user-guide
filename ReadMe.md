@@ -18,7 +18,7 @@ sudo systemctl status kafka
 3. Start Open5gs Core
 ```bash
 cd /home/ubuntu/ashish_work_dir/scripts
-./run_core
+./run_core.sh
 ```
 
 4. Start N Gnbs
